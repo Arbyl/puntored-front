@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Proyecto Frontend: Módulo de Recargas con Next.js
 
-## Getting Started
+Este proyecto frontend está construido con **Next.js** y consume el API del backend desplegado en **Azure App Service**. Permite a los usuarios:
+- Autenticarse y obtener un token.
+- Consultar proveedores de recargas.
+- Realizar recargas de saldo.
+- Ver el resultado de la recarga.
 
-First, run the development server:
+## Requisitos previos
+
+Antes de comenzar, asegúrate de tener instalado:
+- **Node.js** (v14 o superior).
+- **npm** o **yarn** (para gestionar las dependencias).
+
+## Configuración
+
+### 1. Clona el repositorio
+
+```bash
+git clone https://github.com/Arbyl/puntored-front.git
+cd puntored-front
+```
+
+### 2.  Instala las dependencias
+
+Si usas npm:
+```bash
+npm install
+```
+
+Si usas yarn:
+```bash
+yarn install
+```
+
+### 3.  Configura el backend
+El frontend está configurado para conectarse al backend desplegado en Azure App Service. Asegúrate de que el backend esté funcionando correctamente en la URL que se configuró en el código.
+
+En el archivo /page.tsx, el frontend hace llamadas a los siguientes endpoints del backend:
+
+Autenticación: [https://puntored-sb-d9dvhnfhdvgnaqex.canadacentral-01.azurewebsites.net/authenticate](https://puntored-sb-d9dvhnfhdvgnaqex.canadacentral-01.azurewebsites.net/authenticate)
+
+Obtener proveedores: [https://puntored-sb-d9dvhnfhdvgnaqex.canadacentral-01.azurewebsites.net/getSuppliers](https://puntored-sb-d9dvhnfhdvgnaqex.canadacentral-01.azurewebsites.net/getSuppliers)
+
+Realizar compra: [https://puntored-sb-d9dvhnfhdvgnaqex.canadacentral-01.azurewebsites.net/buy](https://puntored-sb-d9dvhnfhdvgnaqex.canadacentral-01.azurewebsites.net//buy)
+
+### 4. Ejecutar el proyecto
+Usa el siguiente comando para ejecutar el proyecto en desarrollo:
+
+Si usas npm:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Si usas yarn:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+El proyecto se ejecutará en http://localhost:3000.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+### 5. Despliegue
+Para desplegar el proyecto en producción, puedes utilizar Vercel o cualquier plataforma de despliegue compatible con Next.js. 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 6. Flujo de la aplicación
+Autenticación: Al iniciar la página, se obtiene un token del backend.
+Obtener Proveedores: Los proveedores disponibles son cargados y mostrados en un dropdown.
+Realizar Recarga: El usuario ingresa el número de teléfono, el monto y selecciona un proveedor para realizar la recarga.
+Resultado: El resultado de la transacción se muestra en pantalla, incluyendo el transactionalID si la recarga fue exitosa.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 7. Archivos importantes
+/page.tsx: Archivo principal que gestiona el flujo de la aplicación y las llamadas a la API del backend.
+/styles: Estilos para la aplicación.
 
-## Deploy on Vercel
+### 8. Consideraciones
+Validaciones: El formulario valida que el número de teléfono tenga 10 dígitos y que el monto sea un valor numérico dentro de los límites permitidos.
+Mensajes de error: Si alguna llamada a la API falla, se muestra un mensaje de error en pantalla.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
