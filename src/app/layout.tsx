@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import { FAB } from "@/components/FAB/FAB";
+import { Analytics } from "@vercel/analytics/react"
+
 
 export const metadata: Metadata = {
   title: "Prueba Tecnica PuntoRed",
@@ -17,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div>
+          <Analytics />
           <Header />
           {children}
           <FAB />
